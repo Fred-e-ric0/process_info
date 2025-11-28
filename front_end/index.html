@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Online Roulette UI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="casino-ui">
+
+        <header class="ui-header">
+            <div class="indicator">
+                <span class="label">SALDO:</span>
+                <span id="balance-display" class="value gold-text">€1250.00</span>
+            </div>
+            <div class="indicator">
+                <span class="label">ÚLTIMO GANHO:</span>
+                <span id="last-win-display" class="value gold-text">€0.00</span>
+            </div>
+            <div class="indicator total-bet">
+                <span class="label">APOSTA TOTAL:</span>
+                <span id="total-bet-display" class="value gold-text">50.00</span>
+            </div>
+            <button class="menu-button">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </button>
+        </header>
+
+        <main class="ui-main-content">
+
+            <section class="wheel-area">
+                <div class="wheel-container">
+                    <div class="wheel-outer-ring">
+                        <div class="wheel-inner-ring">
+                            </div>
+                        <div class="wheel-center-pivot"></div>
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="betting-board">
+                <div id="betting-grid">
+                    <div class="cell zero-cell green" data-bet="0">0</div>
+
+                    <div class="number-cells">
+                        <div class="cell red" data-bet="3">3</div>
+                        <div class="cell black" data-bet="6">6</div>
+                        <div class="cell black" data-bet="36">36</div>
+                        <div class="cell black" data-bet="2">2</div>
+                        <div class="cell red" data-bet="5">5</div>
+                        <div class="cell red" data-bet="35">35</div>
+                        <div class="cell red" data-bet="1">1</div>
+                        <div class="cell black" data-bet="4">4</div>
+                        <div class="cell black" data-bet="34">34</div>
+                    </div>
+
+                    <div class="cell column-bet" data-bet="col3">2:1</div>
+                    <div class="cell column-bet" data-bet="col2">2:1</div>
+                    <div class="cell column-bet" data-bet="col1">2:1</div>
+                    <div class="cell dozen-bet" data-bet="1st12">1° 12</div>
+                    <div class="cell dozen-bet" data-bet="2nd12">2° 12</div>
+                    <div class="cell dozen-bet" data-bet="3rd12">3° 12</div>
+                    
+                    <div class="outside-bets">
+                        <div class="cell wide-bet" data-bet="1-18">1-18</div>
+                        <div class="cell wide-bet" data-bet="par">PAR</div>
+                        <div class="cell wide-bet red-bet" data-bet="red"></div>
+                        <div class="cell wide-bet" data-bet="impar">ÍMPAR</div>
+                        <div class="cell wide-bet" data-bet="19-36">19-36</div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="ui-footer">
+            <div class="chip-selector">
+                <div class="chip" data-value="0.5">0.5</div>
+                <div class="chip" data-value="1">1</div>
+                <div class="chip" data-value="5">5</div>
+                <div class="chip" data-value="10">10</div>
+                <div class="chip" data-value="25">25</div>
+                <div class="chip" data-value="100">100</div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn">LIMPAR</button>
+                <button class="action-btn">DESFAZER</button>
+                <button class="play-btn gold-accent"><div class="play-icon"></div></button>
+                <button class="action-btn">REAPOSTAR</button>
+                <button class="action-btn double-btn">X2</button>
+            </div>
+            
+        </footer>
+    </div>
+    <script src="script/script.js"></script>
+</body>
+</html>

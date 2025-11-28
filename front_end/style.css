@@ -1,0 +1,323 @@
+/* Compiled CSS for the roulette UI (from style/style.scss) */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a1a;
+}
+
+.casino-ui {
+    width: 95vw;
+    max-width: 1400px;
+    height: 90vh;
+    background: radial-gradient(#8b0000 30%, #4d0000 100%);
+    border: 10px solid #ffcc00;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8) inset, 0 0 20px #ffcc00;
+    padding: 20px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 80px 1fr 100px;
+    gap: 20px;
+    font-family: 'Roboto', sans-serif;
+    color: #f0f0f0;
+    position: relative;
+    overflow: hidden;
+}
+
+.gold-text {
+    color: #ffcc00;
+    text-shadow: 0 0 5px rgba(255, 204, 0, 0.7);
+    font-family: 'Playfair Display', serif;
+}
+
+.ui-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 2px solid rgba(255, 204, 0, 0.3);
+}
+
+.indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.indicator .label {
+    font-size: 0.7em;
+    opacity: 0.7;
+}
+
+.indicator .value {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+.menu-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.menu-button .line {
+    width: 30px;
+    height: 3px;
+    background-color: #ffcc00;
+    margin: 5px 0;
+    border-radius: 2px;
+}
+
+.ui-main-content {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 30px;
+}
+
+.wheel-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wheel-container {
+    width: 350px;
+    height: 350px;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.wheel-outer-ring,
+.wheel-inner-ring {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7) inset;
+}
+
+.wheel-outer-ring {
+    background: linear-gradient(135deg, #ffcc00, #a08000);
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.wheel-inner-ring {
+    background-color: #111;
+    background-image: conic-gradient(
+        #d62828 0deg 9.73deg,
+        #111111 9.73deg 19.46deg,
+        #228b22 19.46deg 19.46deg,
+        #d62828 19.46deg 29.19deg,
+        #111
+    );
+    border: 5px solid #a08000;
+    animation: spin-wheel 5s linear infinite;
+}
+
+.wheel-center-pivot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, #fff 10%, #ffcc00 90%);
+    z-index: 10;
+    border: 3px solid #333;
+}
+
+@keyframes spin-wheel {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.betting-board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 3px solid #ffcc00;
+    border-radius: 10px;
+}
+
+#betting-grid {
+    display: grid;
+    grid-template-columns: 80px repeat(12, 1fr) 80px;
+    grid-template-rows: repeat(3, 1fr) 80px 80px;
+    gap: 5px;
+    width: 100%;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s, background-color 0.1s;
+}
+
+.cell:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.zero-cell {
+    grid-row: 1 / span 3;
+    background-color: #228b22;
+    color: white;
+}
+
+.number-cells {
+    grid-column: 2 / span 12;
+    grid-row: 1 / span 3;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.number-cells .cell {
+    min-width: 0;
+    color: white;
+}
+
+.red {
+    background-color: #d62828;
+}
+
+.black {
+    background-color: #111111;
+}
+
+.column-bet {
+    grid-column: 14;
+    background-color: #444;
+    color: white;
+}
+
+.dozen-bet {
+    grid-row: 4;
+    grid-column: 2 / span 4;
+    background-color: #444;
+    color: white;
+    font-size: 0.9em;
+}
+
+.outside-bets {
+    grid-row: 5;
+    grid-column: 2 / span 12;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+}
+
+.wide-bet {
+    background-color: #444;
+    color: white;
+}
+
+.red-bet {
+    background-color: #d62828 !important;
+}
+
+.ui-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-top: 2px solid rgba(255, 204, 0, 0.3);
+}
+
+.chip-selector {
+    display: flex;
+    gap: 15px;
+}
+
+.chip {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    color: white;
+    border: 3px solid #ffcc00;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.1s;
+}
+
+.chip:hover {
+    transform: scale(1.1);
+}
+
+.chip:nth-child(1) { background-color: #880e4f; }
+.chip:nth-child(2) { background-color: #38761d; }
+.chip:nth-child(3) { background-color: #0c3498; }
+.chip:nth-child(4) { background-color: #d58c14; }
+.chip:nth-child(5) { background-color: #990000; }
+.chip:nth-child(6) { background-color: #3d3d3d; }
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.action-btn {
+    background-color: #333;
+    color: #f0f0f0;
+    border: 1px solid #ffcc00;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.2s;
+}
+
+.action-btn:hover {
+    background-color: #555;
+}
+
+.play-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #228b22;
+    border: 5px solid #ffcc00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-icon {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid white;
+}

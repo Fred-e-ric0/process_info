@@ -1,4 +1,4 @@
-// style.scss (Variables for a premium feel)
+// style.css (Variables for a premium feel)
 $color-primary: #8b0000;      // Deep Red / Velvet
 $color-secondary: #ffcc00;    // Gold Accent
 $color-text-light: #f0f0f0;   // Light text
@@ -8,8 +8,6 @@ $color-board-green: #228b22;  // Board Green
 $font-elegant: 'Playfair Display', serif;
 $font-body: 'Roboto', sans-serif;
 
-/* style.css (Compiled from SCSS) */
-
 /* 1. Global Reset and Background */
 body {
     margin: 0;
@@ -18,7 +16,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1a1a1a;
+    background-color: blue;
 }
 
 .casino-ui {
@@ -129,17 +127,17 @@ body {
 
 .wheel-inner-ring {
     background-color: #111;
-    /* Create the illusion of segments using a repeating conic gradient */
+    /* Create the illusion of segments using a conic gradient.
+       O JS substitui isto depois por um gradient mais detalhado. */
     background-image: conic-gradient(
-        #d62828 0deg 9.73deg, /* Red segment */
-        #111111 9.73deg 19.46deg, /* Black segment */
-        #228b22 19.46deg 19.46deg, /* Small green segment */
-        #d62828 19.46deg 29.19deg, /* Next Red */
-        /* ... this gradient continues for 37 segments ... */
-        #111
+        #d62828 0deg 9.73deg,
+        #111111 9.73deg 19.46deg,
+        #228b22 19.46deg 19.46deg,
+        #d62828 19.46deg 29.19deg,
+        #111 29.19deg 360deg
     );
     border: 5px solid #a08000;
-    animation: spin-wheel 5s linear infinite; /* The Dynamic Spin */
+
 }
 
 .wheel-center-pivot {
@@ -153,6 +151,31 @@ body {
     background: radial-gradient(circle, #fff 10%, #ffcc00 90%);
     z-index: 10;
     border: 3px solid #333;
+}
+
+/* Bola da roleta */
+.ball {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fdfdfd;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+    z-index: 30;
+}
+
+/* Números à volta da roda (criados em JS) */
+.wheel-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
 }
 
 /* Keyframe for the dynamic spinning animation */
@@ -184,7 +207,9 @@ body {
     width: 100%;
 }
 
+/* Célula genérica da mesa */
 .cell {
+    position: relative;   /* importante para posicionar a ficha */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -200,6 +225,23 @@ body {
 .cell:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Ficha pequena que aparece na casa onde apostas */
+.bet-chip-marker {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #ffcc00;
+    bottom: 4px;
+    right: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6em;
+    color: #fff;
+    pointer-events: none;  /* não bloqueia cliques na célula */
 }
 
 /* Specific Cell Styles */
@@ -222,6 +264,7 @@ body {
     min-width: 0; /* Important for grid item sizing */
     color: white;
 }
+
 .red { background-color: #d62828; }
 .black { background-color: #111111; }
 
@@ -246,99 +289,12 @@ body {
     grid-template-columns: repeat(5, 1fr);
     gap: 5px;
 }
+
 .wide-bet {
     background-color: #444;
     color: white;
 }
-.red-bet {
-    background-color: #d62828 !important;
-}
 
-/* 6. Betting Board Layout and Cells */
-.betting-board {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.4);
-    border: 3px solid #ffcc00;
-    border-radius: 10px;
-}
-
-#betting-grid {
-    display: grid;
-    grid-template-columns: 80px repeat(12, 1fr) 80px; /* Zero, 12 columns, Column Bets */
-    grid-template-rows: repeat(3, 1fr) 80px 80px; /* 3 rows of numbers, dozen bets, outside bets */
-    gap: 5px;
-    width: 100%;
-}
-
-.cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 1.1em;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
-    transition: transform 0.1s, background-color 0.1s;
-}
-
-.cell:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3);
-}
-
-/* Specific Cell Styles */
-.zero-cell {
-    grid-row: 1 / span 3; /* Zero cell spans three number rows */
-    background-color: #228b22;
-    color: white;
-}
-
-.number-cells {
-    grid-column: 2 / span 12;
-    grid-row: 1 / span 3;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 5px;
-}
-
-.number-cells .cell {
-    min-width: 0; /* Important for grid item sizing */
-    color: white;
-}
-.red { background-color: #d62828; }
-.black { background-color: #111111; }
-
-.column-bet {
-    grid-column: 14; /* Last column */
-    background-color: #444;
-    color: white;
-}
-
-.dozen-bet {
-    grid-row: 4;
-    grid-column: 2 / span 4; /* Adjust columns for 1st 12 */
-    background-color: #444;
-    color: white;
-    font-size: 0.9em;
-}
-
-.outside-bets {
-    grid-row: 5;
-    grid-column: 2 / span 12;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
-}
-.wide-bet {
-    background-color: #444;
-    color: white;
-}
 .red-bet {
     background-color: #d62828 !important;
 }
@@ -380,7 +336,9 @@ body {
 .chip:nth-child(1) { background-color: #880e4f; }
 .chip:nth-child(2) { background-color: #38761d; }
 .chip:nth-child(3) { background-color: #0c3498; }
-/* ... you would use image sprites or dedicated CSS for realistic chips ... */
+.chip:nth-child(4) { background-color: #d58c14; }
+.chip:nth-child(5) { background-color: #990000; }
+.chip:nth-child(6) { background-color: #3d3d3d; }
 
 .action-buttons {
     display: flex;

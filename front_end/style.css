@@ -1,4 +1,6 @@
-/* Compiled CSS for the roulette UI (from style/style.scss) */
+/* Compiled CSS for the roulette UI */
+
+/* 1. Global Reset and Background */
 body {
     margin: 0;
     padding: 0;
@@ -27,12 +29,14 @@ body {
     overflow: hidden;
 }
 
+/* 2. Gold Text Accent */
 .gold-text {
     color: #ffcc00;
     text-shadow: 0 0 5px rgba(255, 204, 0, 0.7);
     font-family: 'Playfair Display', serif;
 }
 
+/* 3. Header Styling */
 .ui-header {
     display: flex;
     justify-content: space-between;
@@ -76,12 +80,14 @@ body {
     border-radius: 2px;
 }
 
+/* 4. Main Content Layout */
 .ui-main-content {
     display: grid;
     grid-template-columns: 350px 1fr;
     gap: 30px;
 }
 
+/* 5. Wheel Styling */
 .wheel-area {
     display: flex;
     justify-content: center;
@@ -123,41 +129,27 @@ body {
         #111
     );
     border: 5px solid #a08000;
-    animation: spin-wheel 5s linear infinite;
+
     overflow: hidden;
 }
 
-.wheel-inner-ring::after {
-    content: '';
-    position: absolute;
-    inset: 40px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 90%);
-    pointer-events: none;
-}
-
-.wheel-center-pivot {
+/* bola da roleta */
+.ball {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50px;
-    height: 50px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
+    background: #fdfdfd;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+    transform-origin: center center;
+    /* posição inicial simples, o JS vai tratar do resto */
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, #fff 10%, #ffcc00 90%);
-    z-index: 10;
-    border: 3px solid #333;
+    z-index: 20;
 }
 
-@keyframes spin-wheel {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
+/* números à volta da roda (marcadores criados em JS) */
 .wheel-number-markers {
     position: absolute;
     inset: 0;
@@ -169,7 +161,6 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     transform-origin: center;
     font-size: 0.8rem;
     font-weight: 700;
@@ -177,18 +168,20 @@ body {
     letter-spacing: 0.5px;
 }
 
-.wheel-number.red {
-    color: #ff6b6b;
+.wheel-number.red { color: #ff6b6b; }
+.wheel-number.black { color: #f0f0f0; }
+.wheel-number.green { color: #8dff9c; }
+
+@keyframes spin-wheel {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-.wheel-number.black {
-    color: #f0f0f0;
-}
-
-.wheel-number.green {
-    color: #8dff9c;
-}
-
+/* 6. Betting Board Layout and Cells */
 .betting-board {
     display: flex;
     justify-content: center;
@@ -207,7 +200,9 @@ body {
     width: 100%;
 }
 
+/* célula genérica da mesa */
 .cell {
+    position: relative;   /* IMPORTANTE p/ posicionar a ficha */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -223,6 +218,23 @@ body {
 .cell:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* ficha pequena que aparece na casa onde apostas */
+.bet-chip-marker {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #ffcc00;
+    bottom: 4px;
+    right: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6em;
+    color: #fff;
+    pointer-events: none;
 }
 
 .zero-cell {
@@ -245,13 +257,8 @@ body {
     color: white;
 }
 
-.red {
-    background-color: #d62828;
-}
-
-.black {
-    background-color: #111111;
-}
+.red { background-color: #d62828; }
+.black { background-color: #111111; }
 
 .column-bet {
     grid-column: 14;
@@ -266,17 +273,9 @@ body {
     font-size: 0.9em;
 }
 
-.first-dozen {
-    grid-column: 2 / span 4;
-}
-
-.second-dozen {
-    grid-column: 6 / span 4;
-}
-
-.third-dozen {
-    grid-column: 10 / span 4;
-}
+.first-dozen  { grid-column: 2 / span 4; }
+.second-dozen { grid-column: 6 / span 4; }
+.third-dozen  { grid-column: 10 / span 4; }
 
 .outside-bets {
     grid-row: 5;
@@ -291,14 +290,10 @@ body {
     color: white;
 }
 
-.red-bet {
-    background-color: #d62828 !important;
-}
+.red-bet   { background-color: #d62828 !important; }
+.black-bet { background-color: #111111 !important; }
 
-.black-bet {
-    background-color: #111111 !important;
-}
-
+/* 7. Footer Controls */
 .ui-footer {
     display: flex;
     justify-content: space-between;

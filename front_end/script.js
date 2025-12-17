@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // enviar aposta para o backend
-            const response = await fetch("http://127.0.0.1:5000/spin", {
+            const response = await fetch("/api/spin", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
